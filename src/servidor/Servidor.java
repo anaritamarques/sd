@@ -11,25 +11,15 @@ import java.net.Socket;
  * Created by Ana Rita on 26/12/2016.
  */
 public class Servidor {
-    private GestorUtilizadores utilizadores;
+    public GestorUtilizadores utilizadores;
     public GestorLeiloes leiloes;
     private ServerSocket ss;
 
     private void aceitaClientes() throws IOException {
         while(true){
             Socket cliente = ss.accept();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-            PrintWriter writer = new PrintWriter(cliente.getOutputStream());
-            String[] info = reader.readLine().split("//");
 
-            if(!utilizadores.registaUtilizador(info[0], info[1]))
-                writer.println("Erro");
-            else {
-                writer.println("Sucesso");
-
-                new Thread(new ThreadCliente(reader, writer, leiloes, info[0])).start();
-            }
-
+            new Thread(new LigacaoCliente(cliente, leiloes, utilizadores));
         }
     }
 

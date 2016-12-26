@@ -24,7 +24,7 @@ public class ThreadCliente implements Runnable {
         String[] args=pedido.split(" ");
         switch (args[0]){
             case "iniciar":
-                int numero=leiloes.iniciarLeilao(args[1]);
+                int numero=leiloes.iniciarLeilao(args[1], nome);
                 writer.println(numero);
                 break;
             case "listar":
@@ -32,7 +32,7 @@ public class ThreadCliente implements Runnable {
                 writer.print(lista);
                 break;
             case "licitar":
-                String resultado=leiloes.licitarLeilao(args[1], args[2]);
+                String resultado=leiloes.licitarLeilao(nome, Integer.parseInt(args[1]), Integer.parseInt(args[2]));
                 writer.println(resultado);
                 break;
             case "finalizar":
