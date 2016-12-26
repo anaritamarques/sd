@@ -8,8 +8,8 @@ import java.io.PrintWriter;
  * Created by Ana Rita on 26/12/2016.
  */
 public class ThreadCliente implements Runnable {
-    private BufferedReader reader;
-    private PrintWriter writer;
+    public BufferedReader reader;
+    public PrintWriter writer;
     public GestorLeiloes leiloes;
     private String nome;
 
@@ -46,6 +46,7 @@ public class ThreadCliente implements Runnable {
     public void run() {
         while(true) {
             try {
+                System.out.println("ESTOU A PEDIR");
                 String pedido = reader.readLine();
                 interpretarPedido(pedido);
 

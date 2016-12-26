@@ -19,7 +19,7 @@ public class Servidor {
         while(true){
             Socket cliente = ss.accept();
 
-            new Thread(new LigacaoCliente(cliente, leiloes, utilizadores));
+            (new Thread(new LigacaoCliente(cliente, leiloes, utilizadores))).start();
         }
     }
 
@@ -35,7 +35,7 @@ public class Servidor {
     }
 
     public static void main (String[] args) {
-        Servidor servidor = new Servidor(555555);
+        Servidor servidor = new Servidor(55555);
 
         try {
             servidor.aceitaClientes();

@@ -12,7 +12,7 @@ import java.net.Socket;
 public class LigacaoCliente implements Runnable {
     public GestorUtilizadores utilizadores;
     public GestorLeiloes leiloes;
-    private Socket cliente;
+    public Socket cliente;
 
     public LigacaoCliente(Socket cliente, GestorLeiloes leiloes, GestorUtilizadores utilizadores) {
         this.cliente = cliente;
@@ -25,7 +25,7 @@ public class LigacaoCliente implements Runnable {
 
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-            PrintWriter writer = new PrintWriter(cliente.getOutputStream());
+            PrintWriter writer = new PrintWriter(cliente.getOutputStream(), true);
             String[] info = reader.readLine().split("//");
             if(!utilizadores.registaUtilizador(info[0], info[1]))
                 writer.println("Erro");

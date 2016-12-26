@@ -48,16 +48,22 @@ public class GestorLeiloes {
     }
 
     public String licitarLeilao(String nome, int id, int licitacao){
+        lockLeiloes.lock();
         Leilao l = leiloes.get(id);
+        String mensagem;
         if(l != null){
             if(licitacao > l.getLicitacaoAtual()){
                 l.setLicitacaoAtual(licitacao);
                 l.setNomeCompradorAtual(nome);
-                return "Sucesso";
+                leiloes.put(id, l);
+                mensagem = "Sucesso";
             }
-            return "Licitação menor que licitação atual";
+            else
+                mensagem = "Licitação menor que licitação atual";
         }
         else
-            return "Leilão Inexistente";
+            mensagem = "Leilão Inexistente";
+        lockLeiloes.unlock();
+        return mensagem;
     }
 }
