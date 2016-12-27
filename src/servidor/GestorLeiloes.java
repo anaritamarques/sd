@@ -37,13 +37,14 @@ public class GestorLeiloes {
         for(Map.Entry<Integer, Leilao> e: leiloes.entrySet()){
             sb.append(e.getKey()).append(" | ");
             sb.append(e.getValue().getDescricao()).append(" | ");
+            sb.append(e.getValue().getLicitacaoAtual()).append(" | ");
             if(e.getValue().getNomeVendedor().equals(nome))
                 sb.append("*");
             if(e.getValue().getNomeCompradorAtual().equals(nome))
                 sb.append("+");
             sb.append("\n");
         }
-
+        sb.append("###\n");
         return sb.toString();
     }
 
@@ -52,14 +53,18 @@ public class GestorLeiloes {
         Leilao l = leiloes.get(id);
         String mensagem;
         if(l != null){
-            if(licitacao > l.getLicitacaoAtual()){
-                l.setLicitacaoAtual(licitacao);
-                l.setNomeCompradorAtual(nome);
-                leiloes.put(id, l);
-                mensagem = "Sucesso";
+            if(!l.getNomeVendedor().equals(nome)) {
+                if(licitacao > l.getLicitacaoAtual()){
+                    l.setLicitacaoAtual(licitacao);
+                    l.setNomeCompradorAtual(nome);
+                    leiloes.put(id, l);
+                    mensagem = "Sucesso";
+                }
+                else
+                    mensagem = "Licitação menor que licitação atual";
             }
             else
-                mensagem = "Licitação menor que licitação atual";
+                mensagem = "É o vendedor deste leilão";
         }
         else
             mensagem = "Leilão Inexistente";

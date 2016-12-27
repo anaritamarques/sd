@@ -29,7 +29,10 @@ public class ThreadCliente implements Runnable {
                 break;
             case "listar":
                 String lista= leiloes.listarLeiloes(nome);
-                writer.print(lista);
+                String[] linhas = lista.split("\n");
+                for(String l: linhas) {
+                    writer.println(l);
+                }
                 break;
             case "licitar":
                 String resultado=leiloes.licitarLeilao(nome, Integer.parseInt(args[1]), Integer.parseInt(args[2]));
@@ -39,6 +42,7 @@ public class ThreadCliente implements Runnable {
                 break;
             default:
                 writer.println("Comando inexistente");
+                break;
         }
     }
 
@@ -46,10 +50,8 @@ public class ThreadCliente implements Runnable {
     public void run() {
         while(true) {
             try {
-                System.out.println("ESTOU A PEDIR");
                 String pedido = reader.readLine();
                 interpretarPedido(pedido);
-
             } catch (IOException e) {
                 System.out.println("Falha na receção do pedido");
             }

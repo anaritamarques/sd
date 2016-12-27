@@ -19,6 +19,7 @@ public class Leilao {
     public Leilao(String descricao, String nomeVendedor) {
         this.descricao = descricao;
         this.nomeVendedor = nomeVendedor;
+        nomeCompradorAtual="";
         licitacaoAtual = 0;
     }
 

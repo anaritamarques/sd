@@ -26,7 +26,7 @@ public class Cliente {
         String line;
         writer.println("listar");
 
-        while((line = reader.readLine()) != null)
+        while(!(line = reader.readLine()).equals("###"))
             sb.append(line).append("\n");
 
         return sb.toString();
@@ -34,56 +34,60 @@ public class Cliente {
 
     public void interpretar(String comando) throws IOException {
         String[] args = comando.split(" ");
-        StringBuilder sb = new StringBuilder();
-        String line;
+        String line="";
         switch(args[0]){
             case "iniciar":
                 if(args.length!=2)
                     System.out.println("Número de argumentos inválido");
                 else
                     writer.println(comando);
+                line = reader.readLine();
                 break;
             case "listar":
+                StringBuilder sb = new StringBuilder();
                 if(args.length!=1)
                     System.out.println("Número de argumentos inválido");
-                else
+                else {
                     writer.println(comando);
+                    while (!(line = reader.readLine()).equals("###"))
+                        sb.append(line).append("\n");
+                    line = sb.toString();
+                }
                 break;
             case "licitar":
                 if(args.length!=3)
                     System.out.println("Número de argumentos inválido");
                 else
                     writer.println(comando);
+                line = reader.readLine();
                 break;
             case "finalizar":
                 if(args.length!=2)
                     System.out.println("Número de argumentos inválido");
                 else
                     writer.println(comando);
+                line = reader.readLine();
                 break;
             default:
-                System.out.println("Comando inválido");
+                line="Comando inválido";
                 break;
         }
 
-        while((line = reader.readLine()) != null)
-            sb.append(line).append("\n");
-
-        System.out.print(sb.toString());
+        System.out.print(line+"\n");
     }
 
     public void correr() throws IOException {
-        /*try {
+        try {
             listarLeiloes();
         } catch (IOException e) {
             System.out.println("Erro a comunicar com o servidor");
-        }*/
-
-        System.out.println("Escreva o seu comando");
-
+        }
         Scanner s = new Scanner(System.in);
         while(true) {
-            interpretar(s.nextLine());
+            System.out.println("Escreva o seu comando");
+            String comando = s.nextLine();
+            interpretar(comando);
+
         }
     }
 
@@ -100,11 +104,8 @@ public class Cliente {
             servidor = new Socket("localhost", 55555);
             BufferedReader reader = new BufferedReader(new InputStreamReader(servidor.getInputStream()));
             PrintWriter writer = new PrintWriter(servidor.getOutputStream(), true);
-            System.out.println("ANTES");
             writer.println(nome+"//"+pass);
-            System.out.println("DEPOIS");
             String resposta = reader.readLine();
-            System.out.println("DEPOIS2");
             System.out.println(resposta);
             if(resposta.equals("Erro"))
                 System.exit(0);
