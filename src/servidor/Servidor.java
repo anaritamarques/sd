@@ -1,9 +1,6 @@
 package servidor;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -19,7 +16,7 @@ public class Servidor {
         while(true){
             Socket cliente = ss.accept();
 
-            (new Thread(new LigacaoCliente(cliente, leiloes, utilizadores))).start();
+            (new Thread(new ThreadCliente(cliente, leiloes, utilizadores))).start();
         }
     }
 
