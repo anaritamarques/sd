@@ -34,14 +34,14 @@ public class Cliente {
 
     public void interpretar(String comando) throws IOException {
         String[] args = comando.split(" ");
-        String line="";
+        String resposta="";
         switch(args[0]){
             case "iniciar":
                 if(args.length!=2)
                     System.out.println("Número de argumentos inválido");
                 else
                     writer.println(comando);
-                line = reader.readLine();
+                resposta = reader.readLine();
                 break;
             case "listar":
                 StringBuilder sb = new StringBuilder();
@@ -49,9 +49,10 @@ public class Cliente {
                     System.out.println("Número de argumentos inválido");
                 else {
                     writer.println(comando);
-                    while (!(line = reader.readLine()).equals("###"))
-                        sb.append(line).append("\n");
-                    line = sb.toString();
+                    String linha="";
+                    while (!(linha = reader.readLine()).equals("###"))
+                        sb.append(linha).append("\n");
+                    resposta = sb.toString();
                 }
                 break;
             case "licitar":
@@ -59,21 +60,21 @@ public class Cliente {
                     System.out.println("Número de argumentos inválido");
                 else
                     writer.println(comando);
-                line = reader.readLine();
+                resposta = reader.readLine();
                 break;
             case "finalizar":
                 if(args.length!=2)
                     System.out.println("Número de argumentos inválido");
                 else
                     writer.println(comando);
-                line = reader.readLine();
+                resposta = reader.readLine();
                 break;
             default:
-                line="Comando inválido";
+                resposta="Comando inválido";
                 break;
         }
 
-        System.out.print(line+"\n");
+        System.out.print(resposta+"\n");
     }
 
     public void correr() throws IOException {

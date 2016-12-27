@@ -16,7 +16,7 @@ public class Servidor {
         while(true){
             Socket cliente = ss.accept();
 
-            (new Thread(new ThreadCliente(cliente, leiloes, utilizadores))).start();
+            (new Thread(new GestorCliente(cliente, leiloes, utilizadores))).start();
         }
     }
 

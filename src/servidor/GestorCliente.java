@@ -9,14 +9,14 @@ import java.net.Socket;
 /**
  * Created by Ana Rita on 26/12/2016.
  */
-public class ThreadCliente implements Runnable {
+public class GestorCliente implements Runnable {
     private String nome;
     public GestorUtilizadores utilizadores;
     public GestorLeiloes leiloes;
     public BufferedReader reader;
     public PrintWriter writer;
 
-    public ThreadCliente(Socket cliente, GestorLeiloes leiloes, GestorUtilizadores utilizadores) throws IOException {
+    public GestorCliente(Socket cliente, GestorLeiloes leiloes, GestorUtilizadores utilizadores) throws IOException {
         nome="";
         reader = new BufferedReader((new InputStreamReader(cliente.getInputStream())));
         writer = new PrintWriter(cliente.getOutputStream(), true);
