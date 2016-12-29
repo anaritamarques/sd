@@ -28,7 +28,8 @@ public class GestorCliente implements Runnable {
         String[] args = pedido.split(" ");
         switch (args[0]) {
             case "iniciar":
-                int numero = leiloes.iniciarLeilao(args[1], nome);
+                String[] desc = pedido.split("\"");
+                int numero = leiloes.iniciarLeilao(desc[1], nome);
                 writer.println(numero);
                 break;
             case "listar":

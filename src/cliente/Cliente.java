@@ -37,7 +37,8 @@ public class Cliente {
         String resposta="";
         switch(args[0]){
             case "iniciar":
-                if(args.length!=2)
+                String[] desc = comando.split("\"");
+                if(desc.length!=2)
                     System.out.println("Número de argumentos inválido");
                 else
                     writer.println(comando);
