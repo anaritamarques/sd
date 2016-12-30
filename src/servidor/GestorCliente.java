@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * Created by Ana Rita on 26/12/2016.
+ * Created by Ana Rita on 26/12/2016. test
  */
 public class GestorCliente implements Runnable {
     private String nome;
