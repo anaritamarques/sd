@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * Created by Ana Rita on 26/12/2016.
+ * Created by Ana Rita on 26/12/2016...
  */
 public class Cliente {
     private String nome;
