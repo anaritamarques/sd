@@ -57,7 +57,9 @@ public class GestorLeiloes {
                 if(licitacao > l.getLicitacaoAtual()){
                     l.setLicitacaoAtual(licitacao);
                     l.setNomeCompradorAtual(nome);
+                    l.adicionaLicitacao(licitacao, nome);
                     leiloes.put(id, l);
+
                     mensagem = "Sucesso";
                 }
                 else

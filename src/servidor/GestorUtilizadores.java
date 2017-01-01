@@ -10,6 +10,7 @@ public class GestorUtilizadores {
     private Map<String, String> utilizadores;
 
     public GestorUtilizadores(){
+
         utilizadores = new TreeMap<>();
     }
 
