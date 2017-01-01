@@ -11,7 +11,7 @@ public class Leilao {
     private String nomeVendedor;
     private String nomeCompradorAtual;
     private int licitacaoAtual;
-    private Map<int, String> licitacoes;
+    private Map<String, int> licitacoes;
 
 
     public Leilao(String descricao, String nomeVendedor, String nomeCompradorAtual, int licitacaoAtual) {
@@ -29,7 +29,7 @@ public class Leilao {
         licitacaoAtual = 0;
     }
 
-    public void adicionaLicitacao(int licitacao, String nome){
+    public void adicionaLicitacao(String nome, int licitacao){
 
         licitacoes.put(nome, licitacao);
     }
