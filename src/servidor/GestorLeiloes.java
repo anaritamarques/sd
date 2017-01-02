@@ -26,6 +26,17 @@ public class  GestorLeiloes {
     private Condition OKread = lockLeiloes.newCondition();
     private int idLeilao;
 
+    private int writers
+
+    public void rlock() throws InterruptedException {
+        lockLeiloes.lock();
+        while (writers != 0 )
+            OKread.await();
+        readers++;
+        //OKread.signalAll();
+        l.unlock();
+
+    }
 
     public GestorLeiloes(){
         leiloes = new TreeMap<>();
