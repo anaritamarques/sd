@@ -35,7 +35,7 @@ public class Cliente {
         return sb.toString();
     }
 
-    public int interpretar(String comando) throws IOException {
+    public void interpretar(String comando) throws IOException {
         String[] args = comando.split(" ");
         int ret = 0;
         String resposta="";
@@ -85,12 +85,9 @@ public class Cliente {
         }
 
         System.out.print(resposta+"\n");
-        return ret;
     }
 
     public void correr() throws IOException {
-
-        int ret = 0;
 
         try {
             listarLeiloes(); //aqui a ideia era mostrar os leiloes para o utilizador ver o que pode fazer
@@ -101,7 +98,7 @@ public class Cliente {
         while(true) {
             System.out.println("Escreva o seu comando");
             String comando = s.nextLine();
-            ret = interpretar(comando);
+            interpretar(comando);
         }
     }
 
@@ -123,7 +120,7 @@ public class Cliente {
             String resposta = reader.readLine();
             if(resposta.equals("Erro"))
                 System.exit(0);
-            int id=Integer.parseInt(resposta);
+            int id = Integer.parseInt(resposta);
             servidorM = new Socket("localhost", 55556+id);
             (new Thread(new GestorMensagem(nome, servidorM))).start();
             (new Cliente(nome, reader, writer, id)).correr();

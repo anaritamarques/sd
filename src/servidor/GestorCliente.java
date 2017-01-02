@@ -9,12 +9,17 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+
 
 /**
- * Created by Ana Rita on 26/12/2016.
+ * <h1>Gestão Clientesx</h1>
+ * A classe GestorCliente foi essencialmente criada para a comunicação entre
+ * o servidor e o cliente. Esta irá armazenar o socket do cliente, os leiloes existentes
+ * os utilizadores
+ *
+ * @author  Ana Marques,Helder Sousa, Jorge Cardoso
+ * @version 1.0
+ * @since   2016
  */
 public class GestorCliente implements Runnable {
     private String nome;
@@ -24,6 +29,7 @@ public class GestorCliente implements Runnable {
     public PrintWriter writer;
     public int id;
 
+
     public GestorCliente(Socket cliente, GestorLeiloes leiloes, GestorUtilizadores utilizadores, int id) throws IOException {
         nome="";
         reader = new BufferedReader((new InputStreamReader(cliente.getInputStream())));
@@ -32,6 +38,13 @@ public class GestorCliente implements Runnable {
         this.utilizadores = utilizadores;
         this.id=id;
     }
+
+    /**
+     * Aqui é onde o servidor irá analisar quais os pedidos efetuados
+     * pelo cliente para poder enviar a mensagem ou pedido para o mesmo.
+     *
+     * @param pedido Comando inserido pelo cliente
+     */
 
     public void interpretarPedido(String pedido) {
         String[] args = pedido.split(" ");
@@ -69,6 +82,12 @@ public class GestorCliente implements Runnable {
         }
     }
 
+    /**
+     * Aqui será interpretado os dados do cliente e tambem a criação do socket para cada cliente onde irá
+     * ser adicionado os seus dados no GestorUtilizador.
+     */
+
+
     @Override
     public void run() {
 
@@ -80,7 +99,7 @@ public class GestorCliente implements Runnable {
                 nome=info[0];
                 ServerSocket sm = new ServerSocket(55556+id);
                 writer.println(id);
-                Socket clienteM= sm.accept();
+                Socket clienteM = sm.accept();
                 utilizadores.adicionarWriter(nome, clienteM);
                 while (true) {
                     try {
