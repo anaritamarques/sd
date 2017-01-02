@@ -121,7 +121,5 @@ public class Cliente {
         } catch (IOException e) {
             System.out.println("Falha na ligação ao servidor");
         }
-
-
     }
 }
