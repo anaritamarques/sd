@@ -13,9 +13,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/**
- * Created by Ana Rita on 26/12/2016.
- */
 public class GestorCliente implements Runnable {
     private String nome;
     public GestorUtilizadores utilizadores;
@@ -54,7 +51,7 @@ public class GestorCliente implements Runnable {
                 break;
             case "finalizar":
                 Leilao l = leiloes.finalizarLeilao(nome, Integer.parseInt(args[1]));
-                String mensagem = "O leilão".concat(args[1]).concat("já terminou. O vencedor é ").concat(l.getNomeCompradorAtual()).concat("!");
+                String mensagem = "O leilão ".concat(args[1]).concat(" já terminou. O vencedor é ").concat(l.getNomeCompradorAtual()).concat("!");
                 HashSet<String> clientes= new HashSet<String>(l.getLicitacoes().keySet());
                 clientes.add(l.getNomeVendedor());
                 utilizadores.notificarClientes(mensagem, clientes);

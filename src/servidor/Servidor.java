@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * Created by Ana Rita on 26/12/2016.
- */
+
 public class Servidor {
     public GestorUtilizadores utilizadores;
     public GestorLeiloes leiloes;

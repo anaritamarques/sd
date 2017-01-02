@@ -10,9 +10,7 @@ import java.util.TreeMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * Created by Ana Rita on 26/12/2016.
- */
+
 public class GestorUtilizadores {
     private Map<String, String> utilizadores;
     private Map<String, PrintWriter> writersClientes;

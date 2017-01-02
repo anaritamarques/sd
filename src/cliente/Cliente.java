@@ -8,20 +8,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-/**
- * Created by Ana Rita on 26/12/2016.
- */
+
 public class Cliente {
     private String nome;
     private BufferedReader reader;
     private PrintWriter writer;
-    private int id;
 
-    public Cliente(String nome, BufferedReader reader, PrintWriter writer, int id) {
+    public Cliente(String nome, BufferedReader reader, PrintWriter writer) {
         this.nome = nome;
         this.reader = reader;
         this.writer = writer;
-        this.id=id;
     }
 
     public String listarLeiloes() throws IOException {
@@ -117,7 +113,7 @@ public class Cliente {
             int id=Integer.parseInt(resposta);
             servidorM = new Socket("localhost", 55556+id);
             (new Thread(new GestorMensagem(nome, servidorM))).start();
-            (new Cliente(nome, reader, writer, id)).correr();
+            (new Cliente(nome, reader, writer)).correr();
         } catch (IOException e) {
             System.out.println("Falha na ligação ao servidor");
         }

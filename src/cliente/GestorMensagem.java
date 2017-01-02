@@ -6,9 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-/**
- * Created by Ana Rita on 01/01/2017.
- */
+
 public class GestorMensagem implements Runnable{
     private String nome;
     private Socket servidor;
@@ -22,9 +20,11 @@ public class GestorMensagem implements Runnable{
     public void run() {
 
         try {
-            BufferedReader reader = new BufferedReader((new InputStreamReader(servidor.getInputStream())));
-            String mensagem = reader.readLine();
-            System.out.println(mensagem);
+            while(true) {
+                BufferedReader reader = new BufferedReader((new InputStreamReader(servidor.getInputStream())));
+                String mensagem = reader.readLine();
+                System.out.println(mensagem);
+            }
         } catch (IOException e) {
             System.out.println("Erro a receber mensagem");
         }

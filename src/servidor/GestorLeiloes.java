@@ -7,9 +7,6 @@ import java.util.TreeMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * Created by Ana Rita on 26/12/2016.
- */
 public class GestorLeiloes {
     private Map<Integer, Leilao> leiloes;
     private final Lock lockLeiloes = new ReentrantLock();

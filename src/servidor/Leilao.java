@@ -3,9 +3,6 @@ package servidor;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * Created by Ana Rita on 26/12/2016.
- */
 public class Leilao {
     private String descricao;
     private String nomeVendedor;
