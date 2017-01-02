@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
@@ -22,7 +23,7 @@ import java.util.concurrent.locks.Condition;
  */
 public class  GestorLeiloes {
     private Map<Integer, Leilao> leiloes;
-    private  Lock lockLeiloes = new ReentrantLock();
+    private  Lock lockLeiloes = new ReentrantLock(true);
     private Condition OKbid = lockLeiloes.newCondition();
     private Condition OKread = lockLeiloes.newCondition();
     private int idLeilao;
@@ -135,7 +136,7 @@ public class  GestorLeiloes {
      * @return           Leilao ou null
      */
     public Leilao finalizarLeilao(String nome, int id) {
-        lockLeiloes.lock();
+        lockLeiloes.tryLock();
         Leilao l = leiloes.get(id);
         String leilao = Integer.toString(id);
         String mensagem ="";
