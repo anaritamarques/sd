@@ -29,8 +29,9 @@ public class Cliente {
     private int id;
 
     /**
-     * O ID que a classe retorna é utilizado como chave para
-     * encontrar no TreeMap a referência ao leilão criado
+     * Construtor responsável pela instanciação
+     * de objectos do tipo cliente. Recebe parâmetros
+     * para comunicar com o servidor.
      *
      * @param  nome      Nome do cliente/ utilizador;
      * @param  reader    apontador p/ socket servidor - cliente;
@@ -44,6 +45,12 @@ public class Cliente {
         this.id=id;
     }
 
+    /**
+     *
+     * A função listarLeiloes() tem como objetivo listar todos os leiloes
+     * existentes.
+     *
+     */
     public String listarLeiloes() throws IOException {
         StringBuilder sb = new StringBuilder();
         String line;
