@@ -11,7 +11,7 @@ public class Leilao {
     private String nomeVendedor;
     private String nomeCompradorAtual;
     private int licitacaoAtual;
-    private Map<String, int> licitacoes;
+    private Map<String, Integer> licitacoes;
 
 
     public Leilao(String descricao, String nomeVendedor, String nomeCompradorAtual, int licitacaoAtual) {
@@ -27,6 +27,7 @@ public class Leilao {
         this.nomeVendedor = nomeVendedor;
         nomeCompradorAtual="sem comprador";
         licitacaoAtual = 0;
+        licitacoes = new TreeMap<>();
     }
 
     public void adicionaLicitacao(String nome, int licitacao){
@@ -50,7 +51,7 @@ public class Leilao {
         return licitacaoAtual;
     }
 
-    public Map<String, int> getLicitacoes() {
+    public Map<String, Integer> getLicitacoes() {
         return licitacoes;
     }
 
@@ -70,7 +71,7 @@ public class Leilao {
         this.licitacaoAtual = licitacaoAtual;
     }
 
-    public void setLicitacoes(Map<String, int> licitacoes) {
+    public void setLicitacoes(Map<String, Integer> licitacoes) {
         this.licitacoes = licitacoes;
     }
 }

@@ -1,6 +1,8 @@
 package servidor;
 
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -72,5 +74,22 @@ public class GestorLeiloes {
             mensagem = "Leilão Inexistente";
         lockLeiloes.unlock();
         return mensagem;
+    }
+
+    public Leilao finalizarLeilao(String nome, int id) {
+        lockLeiloes.lock();
+        Leilao l = leiloes.get(id);
+        String leilao = Integer.toString(id);
+        String mensagem ="";
+        if(l != null && l.getNomeVendedor().equals(nome)) {
+            leiloes.remove(id);
+        }
+        lockLeiloes.unlock();
+        return l;
+    }
+
+    public Leilao getLeilao(int id){
+        Leilao l = leiloes.get(id);
+        return l;
     }
 }

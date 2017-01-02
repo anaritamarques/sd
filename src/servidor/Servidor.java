@@ -11,19 +11,20 @@ public class Servidor {
     public GestorUtilizadores utilizadores;
     public GestorLeiloes leiloes;
     private ServerSocket ss;
+    private int id;
 
     private void aceitaClientes() throws IOException {
         while(true){
+            id++;
             Socket cliente = ss.accept();
-
-            (new Thread(new GestorCliente(cliente, leiloes, utilizadores))).start();
+            (new Thread(new GestorCliente(cliente, leiloes, utilizadores, id))).start();
         }
     }
 
     public Servidor(int porta){
         utilizadores=new GestorUtilizadores();
         leiloes=new GestorLeiloes();
-
+        id =0;
         try {
             ss= new ServerSocket(porta);
         } catch (IOException e) {
@@ -32,9 +33,9 @@ public class Servidor {
     }
 
     public static void main (String[] args) {
-        Servidor servidor = new Servidor(55555);
 
         try {
+            Servidor servidor = new Servidor(55555);
             servidor.aceitaClientes();
         } catch (IOException e) {
             System.out.println("Erro a aceitar cliente");

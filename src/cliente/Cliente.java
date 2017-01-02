@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -14,11 +15,13 @@ public class Cliente {
     private String nome;
     private BufferedReader reader;
     private PrintWriter writer;
+    private int id;
 
-    public Cliente(String nome, BufferedReader reader, PrintWriter writer) {
+    public Cliente(String nome, BufferedReader reader, PrintWriter writer, int id) {
         this.nome = nome;
         this.reader = reader;
         this.writer = writer;
+        this.id=id;
     }
 
     public String listarLeiloes() throws IOException {
@@ -80,7 +83,7 @@ public class Cliente {
 
     public void correr() throws IOException {
         try {
-            listarLeiloes();
+            listarLeiloes(); //aqui a ideia era mostrar os leiloes para o utilizador ver o que pode fazer
         } catch (IOException e) {
             System.out.println("Erro a comunicar com o servidor");
         }
@@ -102,17 +105,19 @@ public class Cliente {
         System.out.println("Password:");
         pass=s.nextLine();
         Socket servidor = null;
+        Socket servidorM = null;
         try {
             servidor = new Socket("localhost", 55555);
             BufferedReader reader = new BufferedReader(new InputStreamReader(servidor.getInputStream()));
             PrintWriter writer = new PrintWriter(servidor.getOutputStream(), true);
             writer.println(nome+"//"+pass);
             String resposta = reader.readLine();
-            System.out.println(resposta);
             if(resposta.equals("Erro"))
                 System.exit(0);
-
-            (new Cliente(nome, reader, writer)).correr();
+            int id=Integer.parseInt(resposta);
+            servidorM = new Socket("localhost", 55556+id);
+            (new Thread(new GestorMensagem(nome, servidorM))).start();
+            (new Cliente(nome, reader, writer, id)).correr();
         } catch (IOException e) {
             System.out.println("Falha na ligação ao servidor");
         }
