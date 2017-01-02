@@ -18,7 +18,7 @@ import java.util.Scanner;
  * seguida retornando um boolean terminando o programa ou criando um socket
  * para o servidor de mensagens.
  *
- * @author  Zara Ali
+ * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
  */
@@ -36,7 +36,6 @@ public class Cliente {
      * @param  reader    apontador p/ socket servidor - cliente;
      * @param  writer    apontador p/ socket cliente - Servidor;
      * @param  id        Descrição do objeto a ser leiloado;
-     * @return           ID do leilão
      */
     public Cliente(String nome, BufferedReader reader, PrintWriter writer, int id) {
         this.nome = nome;

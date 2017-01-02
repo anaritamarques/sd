@@ -15,7 +15,8 @@ import java.util.concurrent.locks.Condition;
  * num treeMap. É a partir da classe GestorLeiloes
  * que se providencia ferramentas capazes de iniciar,
  * licitar e terminar leilões.
- * @author  Zara Ali
+ *
+ * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
  */
@@ -25,18 +26,6 @@ public class  GestorLeiloes {
     private Condition OKbid = lockLeiloes.newCondition();
     private Condition OKread = lockLeiloes.newCondition();
     private int idLeilao;
-
-    private int writers
-
-    public void rlock() throws InterruptedException {
-        lockLeiloes.lock();
-        while (writers != 0 )
-            OKread.await();
-        readers++;
-        //OKread.signalAll();
-        l.unlock();
-
-    }
 
     public GestorLeiloes(){
         leiloes = new TreeMap<>();

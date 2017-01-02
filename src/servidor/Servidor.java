@@ -15,7 +15,7 @@ import java.net.Socket;
  * cria uma nova thread instanciando um objeto do tipo
  * gestorCliente. Mais detalhes são fornecidos abaixo
  *
- * @author  Zara Ali
+ * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
  */
@@ -30,9 +30,6 @@ public class Servidor {
      * O ID que a classe retorna é utilizado como chave para
      * encontrar no TreeMap a referência ao leilão criado
      *
-     * @param  descricao Descrição do objeto a ser leiloado;
-     * @param  nome      Nome do vendedor a criar leilão;
-     * @return           ID do leilão
      */
     private void aceitaClientes() throws IOException {
         while(true){

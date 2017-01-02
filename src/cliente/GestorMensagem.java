@@ -7,7 +7,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
- * Created by Ana Rita on 01/01/2017.
+ * <h1>Gestor de Mensagens</h1>
+ *
+ * Na classe GestorMensagem tem como objetivo guardar a informação
+ * referente ao cliente para poder enviar as mensagens para os mesmos.
+ *
+ * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
+ * @version 1.0
+ * @since   2016
  */
 public class GestorMensagem implements Runnable{
     private String nome;

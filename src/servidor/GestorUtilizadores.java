@@ -18,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * criados em Cliente e servem apenas o propósito de
  * receber mensagens por parte do servidor/Gestor
  *
- * @author  Zara Ali
+ * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
  */
