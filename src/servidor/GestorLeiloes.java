@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.Condition;
+
 
 /**
  * <h1>Gestão dos Leilões</h1>
@@ -19,8 +21,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class  GestorLeiloes {
     private Map<Integer, Leilao> leiloes;
-    private final Lock lockLeiloes = new ReentrantLock();
+    private  Lock lockLeiloes = new ReentrantLock();
+    private Condition OKbid = lockLeiloes.newCondition();
+    private Condition OKread = lockLeiloes.newCondition();
     private int idLeilao;
+
 
     public GestorLeiloes(){
         leiloes = new TreeMap<>();
