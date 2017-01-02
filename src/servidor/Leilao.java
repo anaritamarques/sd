@@ -4,8 +4,18 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Created by Ana Rita on 26/12/2016.
+ * <h1>Leilão</h1>
+ * A partir do momento que o Leilão é criado é instanciado
+ * um objeto do tipo Leilão, onde é criado o nome , atribuido
+ * pelo criador, o nome do vendedor, o nome do comprador atual
+ * a licitação em que este decorre e uma estrutura p/ guardar
+ * as licitações feitas pelos clientes.
+ *
+ * @author  Ana Marques,Helder Sousa, Jorge Cardoso
+ * @version 1.0
+ * @since   2016
  */
+
 public class Leilao {
     private String descricao;
     private String nomeVendedor;
@@ -13,14 +23,6 @@ public class Leilao {
     private int licitacaoAtual;
     private Map<String, Integer> licitacoes;
 
-
-    public Leilao(String descricao, String nomeVendedor, String nomeCompradorAtual, int licitacaoAtual) {
-        this.descricao = descricao;
-        this.nomeVendedor = nomeVendedor;
-        this.nomeCompradorAtual = nomeCompradorAtual;
-        this.licitacaoAtual = licitacaoAtual;
-        licitacoes = new TreeMap<>();
-    }
 
     public Leilao(String descricao, String nomeVendedor) {
         this.descricao = descricao;

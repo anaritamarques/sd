@@ -3,7 +3,13 @@ package servidor;
 import java.io.PrintWriter;
 
 /**
- * Created by Ana Rita on 02/01/2017.
+ * <h1>Notificador</h1>
+ *
+ * A classe Notificador foi criada com o objetivo de comunicar com todos os
+ * clientes do servidor.
+ * @author  Ana Marques,Helder Sousa, Jorge Cardoso
+ * @version 1.0
+ * @since   2016
  */
 public class Notificador implements Runnable{
     private PrintWriter cliente;

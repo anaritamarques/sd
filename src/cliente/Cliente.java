@@ -57,51 +57,58 @@ public class Cliente {
 
     public void interpretar(String comando) throws IOException {
         String[] args = comando.split(" ");
+        int ret = 0;
         String resposta="";
         switch(args[0]){
             case "iniciar":
                 String[] desc = comando.split("\"");
                 if(desc.length!=2)
                     System.out.println("Número de argumentos inválido");
-                else
+                else{
                     writer.println(comando);
-                resposta = reader.readLine();
+                    resposta = reader.readLine();
+                }
                 break;
             case "listar":
                 StringBuilder sb = new StringBuilder();
                 if(args.length!=1)
                     System.out.println("Número de argumentos inválido");
+
                 else {
                     writer.println(comando);
                     String linha="";
                     while (!(linha = reader.readLine()).equals("###"))
                         sb.append(linha).append("\n");
                     resposta = sb.toString();
-                }
+                    }
                 break;
             case "licitar":
                 if(args.length!=3)
                     System.out.println("Número de argumentos inválido");
-                else
+                else{
                     writer.println(comando);
-                resposta = reader.readLine();
+                    resposta = reader.readLine();
+                    }
                 break;
             case "finalizar":
                 if(args.length!=2)
                     System.out.println("Número de argumentos inválido");
-                else
+                else{
                     writer.println(comando);
-                resposta = reader.readLine();
+                    resposta = reader.readLine();
+                    break;
+                    }
                 break;
             default:
                 resposta="Comando inválido";
-                break;
+            break;
         }
 
         System.out.print(resposta+"\n");
     }
 
     public void correr() throws IOException {
+
         try {
             listarLeiloes(); //aqui a ideia era mostrar os leiloes para o utilizador ver o que pode fazer
         } catch (IOException e) {
@@ -112,7 +119,6 @@ public class Cliente {
             System.out.println("Escreva o seu comando");
             String comando = s.nextLine();
             interpretar(comando);
-
         }
     }
 
@@ -134,7 +140,7 @@ public class Cliente {
             String resposta = reader.readLine();
             if(resposta.equals("Erro"))
                 System.exit(0);
-            int id=Integer.parseInt(resposta);
+            int id = Integer.parseInt(resposta);
             servidorM = new Socket("localhost", 55556+id);
             (new Thread(new GestorMensagem(nome, servidorM))).start();
             (new Cliente(nome, reader, writer, id)).correr();

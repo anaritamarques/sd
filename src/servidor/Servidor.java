@@ -15,10 +15,12 @@ import java.net.Socket;
  * cria uma nova thread instanciando um objeto do tipo
  * gestorCliente. Mais detalhes são fornecidos abaixo
  *
+<<<<<<< HEAD
  * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
  */
+
 public class Servidor {
     public GestorUtilizadores utilizadores;
     public GestorLeiloes leiloes;
@@ -32,6 +34,7 @@ public class Servidor {
      *
      */
     private void aceitaClientes() throws IOException {
+
         while(true){
             id++;
             Socket cliente = ss.accept();
@@ -39,12 +42,22 @@ public class Servidor {
         }
     }
 
+    /**
+     * Método para criação do objeto servidor.
+     * No GestorUtilizador irá ser criado dois Maps para
+     * armazenar todos os clientes associados a si com o numero da porta com que lhe foi atribuido.
+     * No GestorLeilões irá  armazenar toda a informção que diz respeito
+     * ao Leilao. Posto isto irá ser criado um socket para o servidor.
+     *
+     * @param porta porta para criação de servidor
+     */
+
     public Servidor(int porta){
-        utilizadores=new GestorUtilizadores();
-        leiloes=new GestorLeiloes();
-        id =0;
+        utilizadores = new GestorUtilizadores();
+        leiloes = new GestorLeiloes();
+        id = 0;
         try {
-            ss= new ServerSocket(porta);
+            ss = new ServerSocket(porta);
         } catch (IOException e) {
             System.out.println("Erro na criação do socket");
         }
