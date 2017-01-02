@@ -11,7 +11,7 @@ import java.util.TreeMap;
  * a licitação em que este decorre e uma estrutura p/ guardar
  * as licitações feitas pelos clientes.
  *
- * @author  Ana Marques,Helder Sousa, Jorge Cardoso
+ * @author  Ana Rita,Helder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
  */

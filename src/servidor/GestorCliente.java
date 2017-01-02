@@ -17,10 +17,10 @@ import java.util.HashSet;
  * o servidor e o cliente. Esta irá armazenar o socket do cliente, os leiloes existentes
  * os utilizadores
  *
- * @author  Ana Marques,Helder Sousa, Jorge Cardoso
+ * @author  Ana Rita,Helder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
- */
+ **/
 public class GestorCliente implements Runnable {
     private String nome;
     public GestorUtilizadores utilizadores;

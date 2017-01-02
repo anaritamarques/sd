@@ -7,7 +7,8 @@ import java.io.PrintWriter;
  *
  * A classe Notificador foi criada com o objetivo de comunicar com todos os
  * clientes do servidor.
- * @author  Ana Marques,Helder Sousa, Jorge Cardoso
+ *
+ * @author  Ana Rita,Helder Sousa, Jorge Cardoso
  * @version 1.0
  * @since   2016
  */

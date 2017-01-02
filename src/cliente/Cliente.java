@@ -9,7 +9,18 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * Created by Ana Rita on 26/12/2016.
+ * <h1>Cliente</h1>
+ * O Cliente deve comunicar com o servidor
+ * para tal utiliza-se um socket com a porta 55555
+ * sendo que o utilizador deve introduzir uma palavra-passe
+ * e um nome de utilizador enviando a informação para o servidor
+ * este por sua vez deve verificar a existência ou não de conta e de
+ * seguida retornando um boolean terminando o programa ou criando um socket
+ * para o servidor de mensagens.
+ *
+ * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
+ * @version 1.0
+ * @since   2016
  */
 public class Cliente {
     private String nome;
@@ -17,6 +28,16 @@ public class Cliente {
     private PrintWriter writer;
     private int id;
 
+    /**
+     * Construtor responsável pela instanciação
+     * de objectos do tipo cliente. Recebe parâmetros
+     * para comunicar com o servidor.
+     *
+     * @param  nome      Nome do cliente/ utilizador;
+     * @param  reader    apontador p/ socket servidor - cliente;
+     * @param  writer    apontador p/ socket cliente - Servidor;
+     * @param  id        Descrição do objeto a ser leiloado;
+     */
     public Cliente(String nome, BufferedReader reader, PrintWriter writer, int id) {
         this.nome = nome;
         this.reader = reader;
@@ -24,6 +45,12 @@ public class Cliente {
         this.id=id;
     }
 
+    /**
+     *
+     * A função listarLeiloes() tem como objetivo listar todos os leiloes
+     * existentes.
+     *
+     */
     public String listarLeiloes() throws IOException {
         StringBuilder sb = new StringBuilder();
         String line;
@@ -127,7 +154,5 @@ public class Cliente {
         } catch (IOException e) {
             System.out.println("Falha na ligação ao servidor");
         }
-
-
     }
 }

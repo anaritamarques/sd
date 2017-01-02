@@ -4,15 +4,28 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.Condition;
+
 
 /**
- * Created by Ana Rita on 26/12/2016.
+ * <h1>Gestão dos Leilões</h1>
+ * Cada leilão criado pelos clientes, é introduzido
+ * num treeMap. É a partir da classe GestorLeiloes
+ * que se providencia ferramentas capazes de iniciar,
+ * licitar e terminar leilões.
+ *
+ * @author  Ana Rita, Hélder Sousa, Jorge Cardoso
+ * @version 1.0
+ * @since   2016
  */
-public class GestorLeiloes {
+public class  GestorLeiloes {
     private Map<Integer, Leilao> leiloes;
-    private final Lock lockLeiloes = new ReentrantLock();
+    private  Lock lockLeiloes = new ReentrantLock(true);
+    private Condition OKbid = lockLeiloes.newCondition();
+    private Condition OKread = lockLeiloes.newCondition();
     private int idLeilao;
 
     public GestorLeiloes(){
@@ -25,6 +38,16 @@ public class GestorLeiloes {
         return idLeilao;
     }
 
+
+    /**
+     * Retorna o ID do leilão.
+     * O ID que a classe retorna é utilizado como chave para
+     * encontrar no TreeMap a referência ao leilão criado
+     *
+     * @param  descricao Descrição do objeto a ser leiloado;
+     * @param  nome      Nome do vendedor a criar leilão;
+     * @return           ID do leilão
+     */
     public int iniciarLeilao(String descricao, String nome) {
         int id = calcularIdLeilao();
         Leilao novo = new Leilao(descricao, nome);
@@ -34,6 +57,17 @@ public class GestorLeiloes {
         return id;
     }
 
+
+    /**
+     * Retorna uma lista de todos os leilões;
+     * No caso do leilão ter sido criado pelo utilizador que
+     * está a realizar a chamada ao método, deve aparecer um
+     * "*" no final da linha, no caso de ser o licitador
+     * com vantagem deve aparecer um "+"
+     *
+     * @param  nome      Noome do utilizador que chama método
+     * @return           STRING com todos os leilões
+     */
     public String listarLeiloes(String nome) { //será necessário lock?
         StringBuilder sb = new StringBuilder();
         for(Map.Entry<Integer, Leilao> e: leiloes.entrySet()){
@@ -50,6 +84,21 @@ public class GestorLeiloes {
         return sb.toString();
     }
 
+
+
+
+    /**
+     * Retorna String com mensagem para licitador
+     * No caso do leilão ter sido criado pelo utilizador que
+     * está a realizar a chamada ao método, deve aparecer um
+     * "*" no final da linha, no caso de ser o licitador
+     * com vantagem deve aparecer um "+"
+     *
+     * @param  nome      Nome/String do utilizador que chama método
+     * @param  id        id/int do leilão que o utilizador licita
+     * @param  licitacao licitação/int do leilão que o user licita
+     * @return           STRING mensagens específicas para o user
+     */
     public String licitarLeilao(String nome, int id, int licitacao){
         lockLeiloes.lock();
         Leilao l = leiloes.get(id);
@@ -76,8 +125,18 @@ public class GestorLeiloes {
         return mensagem;
     }
 
+    /**
+     * Retorna referência para objeto leilao;
+     * Retorna null no caso do leilão não existir no Map ou já
+     * ter sido removido e retorna null se o utilizador não for
+     * o autor do leilão referenciado pelo ID
+     *
+     * @param  nome      Nome/String do utilizador que chama método
+     * @param  id        id/int do leilão que utilizador termina
+     * @return           Leilao ou null
+     */
     public Leilao finalizarLeilao(String nome, int id) {
-        lockLeiloes.lock();
+        lockLeiloes.tryLock();
         Leilao l = leiloes.get(id);
         String leilao = Integer.toString(id);
         String mensagem ="";
@@ -88,6 +147,15 @@ public class GestorLeiloes {
         return l;
     }
 
+
+    /**
+     * Retorna objecto leilao;
+     * No caso de não existir o leilão com o ID referido
+     * então retorna null
+     *
+     * @param  id        id/int do leilão que deve ser retornado
+     * @return           Leilao ou null
+     */
     public Leilao getLeilao(int id){
         Leilao l = leiloes.get(id);
         return l;
